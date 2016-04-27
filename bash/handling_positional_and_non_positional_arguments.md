@@ -54,7 +54,7 @@ script.sh [options] ARG1 ARG2
 
 3. Retrieve poistional arguments
 
-  Positional arguments can be retrieved using array expansion:
+  Positional arguments can be retrieved using array expansion, although note that `shellcheck` will complain about the implicit conversion of an arrary to a string:
   
   ```shell
   ${@:START:COUNT}
@@ -64,7 +64,14 @@ script.sh [options] ARG1 ARG2
   
   ```shell
   ARG1=${@:OPTIND:1}
-  ARG2=${@:OPTIND:2}
+  ARG2=${@:OPTIND+1:1}
   ```
+
+  Alternatively, bash indirect expansion can be used, as follows:
+
+  ```shell
+  ARG2=${!OPTIND+1}
+
+
 
 
