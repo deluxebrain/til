@@ -14,6 +14,10 @@ wrapper -x <my_autounattend_file> -- /
 
 Internally the script would then transform the autounattend file, and pass the arguments onto packer. Note, the `--` is used to demarcate the argument ownership between the wrapper and packer (or whatever command is being proxied).
 
+```shell
+packer build --varfile=<my_var_file> <my_template_file>
+```
+
 This can be achieved as follows:
 
 ```shell
@@ -29,16 +33,18 @@ PATH="$(brew --prefix)"/opt/gnu-getopt/bin:$PATH
 eval set -- "$(getopt -q -n foo -o +m:ih -- "$@")"
 while test "$1" != "--"; do 
       case "$1" in
-            -h) : ;;
-            -i) : ;;
-            -m) shift ;; # shift off the argument
+            -h) : ;;      # do something
+            -i) : ;;      # do something
+            -m) shift ;;  # shift off the argument
       esac
-      shift  # shift off the argument
+      shift # shift off the current argument
 done
 
 shift  # delete the "--"
+
+# show whats left ...
 echo "remaining args are: $*"
 
-# which we can then use to proxy a command
+# which we can then use to proxy a command, e.g. to ls
 eval "ls $*"
 ```
