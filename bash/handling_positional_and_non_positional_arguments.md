@@ -72,6 +72,3 @@ script.sh [options] ARG1 ARG2
   ```shell
   ARG2=${!OPTIND+1}
 
-
-
-
