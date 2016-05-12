@@ -51,6 +51,8 @@ eval "ls $*"
 
 Theres no real magic to this. GNU getopts is POSIX compliant in that it stops processing when it comes across `--`. Hence it naturally fulfills the requirements of supporting two sets of arguments (one for the wrapper, one for the command) by separating them using `--`. 
 
+In its current setup (POSIX compliant mode) positional arguments are not supported before the `--`. This can be changed by simply throwing it out of POSIX compliant mode via using `-` as the first character in the getopts definition. 
+
 Note that it is theoretically it is possible to get `getopts` to work in this mode ( via an environment variable I have forgotten ). However, I could never get it to work.
 
 
