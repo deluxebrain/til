@@ -15,6 +15,8 @@ wrapper -x <my_autounattend_file> -- /
 Internally the script would then transform the autounattend file, and pass the arguments onto packer. Note, the `--` is used to demarcate the argument ownership between the wrapper and packer (or whatever command is being proxied).
 
 This can be achieved as follows:
+
+```shell
 #!/bin/bash
 
 # bring in gnu getopt (a keg only brew package that isnt linked by default)
@@ -39,4 +41,4 @@ echo "remaining args are: $*"
 
 # which we can then use to proxy a command
 eval "ls $*"
-
+```
