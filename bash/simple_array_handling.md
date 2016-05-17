@@ -14,10 +14,12 @@ The length of an array can be queried as follows:
 length=${#options[@]}
 ```
 
-This allows arrays to be constructed as follows:
+This allows arrays to be populated as follows:
 
 ```shell
 declare -a options
+
+# as Bash arrays are zero indexed, the current count points to the next insert index
 options[$#options[@]}]="Some value"
 ```
 
@@ -26,7 +28,23 @@ options[$#options[@]}]="Some value"
 Arrays can be constructed and appended as follows:
 
 ```shell
-options=(...)
-options+=(...)
+options=( list )
+options+=( list )
 ```
+
+In the case of array construction, the `list` used to construct the array is a string that is separated on a certain character. The string splitting is done on the `IFS` environment variable, which defaults to *whitespace*.
+
+e.g. 
+
+```shell
+local options
+# execute in subshell to preserve IFS
+(
+  IFS=","
+  optionstring="option 1, option 2, options 3"
+  options=( $optionstring )
+)
+```
+
+
 
