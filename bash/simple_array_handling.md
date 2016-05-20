@@ -20,7 +20,7 @@ This allows arrays to be populated as follows:
 declare -a options
 
 # as Bash arrays are zero indexed, the current count points to the next insert index
-options[$#options[@]}]="Some value"
+options[${#options[@]}]="Some value"
 ```
 
 ## Arrays done right
