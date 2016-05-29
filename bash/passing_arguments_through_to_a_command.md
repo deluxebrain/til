@@ -29,12 +29,13 @@ PATH="$(brew --prefix)"/opt/gnu-getopt/bin:$PATH
 # use -q as not interested in hearing about invalid options
 # -n foo -> report errors from foo
 # -o -> single character options
+# -l -> multi-character options
 # + -> POSIX compliant mode (equivalent to setting the POSIXLY_CORRECT environment variable) that causes parsing to stop at first non-option parameter
-eval set -- "$(getopt -q -n foo -o +m:ih -- "$@")"
+eval set -- "$(getopt -q -n foo -o +m:ih -l foo -- "$@")"
 while test "$1" != "--"; do 
       case "$1" in
-            -h) : ;;      # do something
-            -i) : ;;      # do something
+            -h)       : ;;      # do something
+            -i|--foo) : ;;      # do something
             -m) shift ;;  # shift off the argument
       esac
       shift # shift off the current argument
@@ -53,6 +54,6 @@ Theres no real magic to this. GNU getopts is POSIX compliant in that it stops pr
 
 In its current setup (POSIX compliant mode) positional arguments are not supported before the `--`. This can be changed by simply throwing it out of POSIX compliant mode via using `-` as the first character in the getopts definition. 
 
-Note that it is theoretically it is possible to get `getopts` to work in this mode ( via an environment variable I have forgotten ). However, I could never get it to work.
+Note that it is theoretically it is possible to get `getopts` to work in this mode by setting the `POSIXLY_CORRECT` environment variable. However, I could never get it to work.
 
 
