@@ -42,3 +42,27 @@ Description : ...
 Size : ...
 ```
 
+### Time-zone information
+
+Use the following command from a Windows box to list timezone strings:
+
+```shell
+tzutil /l
+```
+
+To find the currently installed timezone use:
+
+```shell
+tzutil /g
+```
+
+This gives the following configuration in the ```Autounattend.xml``` file to install UTC:
+
+```shell
+<TimeZone>UTC</TimeZone>
+```
+
+
+
+
+
